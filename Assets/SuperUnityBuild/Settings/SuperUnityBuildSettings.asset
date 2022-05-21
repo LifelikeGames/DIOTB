@@ -1,0 +1,122 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9117770248446516411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97d88f7d353534a4fbdeb11196057db7, type: 3}
+  m_Name: UploadItch
+  m_EditorClassIdentifier: 
+  actionType: 1
+  actionName: UploadItch
+  note: 
+  actionEnabled: 1
+  configureEditor: 0
+  filter:
+    condition: 0
+    clauses: []
+  pathToButlerExe: /mnt/fourtb/homeextension/slowprograms/Apps/Butler/butler
+  nameOfItchUser: vitasoftware
+  nameOfItchGame: diotb
+  useGeneratedBuildVersion: 1
+  channelName: $PLATFORM-$ARCHITECTURE
+  showUploadProgress: 1
+  itchChannelOverride: 
+--- !u!114 &-7064072674538009495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dc439ce9d1bfb34a821f7d6fabc4fef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enabled: 1
+  distributionList:
+    distributions: []
+  architectures:
+  - target: 24
+    name: Linux x64
+    enabled: 1
+    binaryNameFormat: '{0}.x86_64'
+  variants: []
+  platformName: Linux
+  dataDirNameFormat: '{0}_Data'
+  targetGroup: 1
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d5886119a5c7b34d8872ab527ca3e1b, type: 3}
+  m_Name: SuperUnityBuildSettings
+  m_EditorClassIdentifier: 
+  _basicSettings:
+    baseBuildFolder: Builds
+    buildPath: $VERSION/$RELEASE_TYPE/$PLATFORM/$ARCHITECTURE
+    openFolderPostBuild: 1
+  _productParameters:
+    buildCounter: 1
+    buildVersion: 0.0.1.1
+    versionTemplate: 0.0.1.$BUILD
+    autoGenerate: 1
+    syncWithPlayerSettings: 0
+  _releaseTypeList:
+    releaseTypes:
+    - typeName: GameJam
+      bundleIdentifier: eu.vitasoftware.deathbegins
+      companyName: VitaSoftware
+      productName: DeathBegins
+      buildOptions: 0
+      customDefines: 
+      sceneList:
+        enabledScenes:
+        - fileGUID: 511da82f0ca6684f78ac1df3a2c3adc7
+  _platformList:
+    platforms:
+    - {fileID: -7064072674538009495}
+  _projectConfigurations:
+    configSet:
+      _Buckets: ffffffff0100000002000000
+      _HashCodes: 129d014d9121195908700d4c
+      _Next: ffffffff00000000ffffffff
+      _Count: 3
+      _Version: 3
+      _FreeList: -1
+      _FreeCount: 0
+      _Keys:
+      - GameJam/Linux/Linux x64
+      - GameJam/Linux
+      - GameJam
+      _Values:
+      - enabled: 1
+        childKeys: []
+      - enabled: 1
+        childKeys:
+        - GameJam/Linux/Linux x64
+      - enabled: 1
+        childKeys:
+        - GameJam/Linux
+    showViewOptions: 0
+    showConfigs: 0
+    showBuildInfo: 0
+    hideDisabled: 0
+    treeView: 0
+    selectedKeyChain: 
+  _preBuildActions:
+    buildActions: []
+  _postBuildActions:
+    buildActions:
+    - {fileID: -9117770248446516411}
