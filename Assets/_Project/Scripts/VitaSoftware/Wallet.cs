@@ -4,7 +4,7 @@ using UnityEngine;
 namespace VitaSoftware
 {
     [CreateAssetMenu(fileName = "New Wallet", menuName = "VitaSoftware/Wallet", order = 0)]
-    public class Wallet : ScriptableObject
+    public class Wallet : ScriptableManager
     {
         [SerializeField] private float startingMoney;
 
@@ -36,7 +36,7 @@ namespace VitaSoftware
             return false;
         }
 
-        public void Initialise()
+        public override void Initialise()
         {
             CurrentMoney = startingMoney;
             MoneyUpdated?.Invoke(CurrentMoney);
