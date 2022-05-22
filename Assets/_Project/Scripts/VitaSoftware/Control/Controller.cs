@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace VitaSoftware
+namespace VitaSoftware.Control
 {
     public abstract class Controller : MonoBehaviour
     {

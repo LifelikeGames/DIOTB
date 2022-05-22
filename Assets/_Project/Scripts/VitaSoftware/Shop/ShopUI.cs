@@ -1,7 +1,7 @@
-using System;
 using UnityEngine;
+using VitaSoftware.Control;
 
-namespace VitaSoftware
+namespace VitaSoftware.Shop
 {
     public class ShopUI : MonoBehaviour
     {

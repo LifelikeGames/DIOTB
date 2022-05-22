@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-namespace VitaSoftware
+namespace VitaSoftware.Logistics
 {
     public class DeliveryZone : MonoBehaviour
     {

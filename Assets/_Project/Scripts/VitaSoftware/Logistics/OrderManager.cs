@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using VitaSoftware.General;
+using VitaSoftware.Shop;
 
-namespace VitaSoftware
+namespace VitaSoftware.Logistics
 {
     [CreateAssetMenu(fileName = "New Order Manager", menuName = "VitaSoftware/OrderManager", order = 0)]
     public class OrderManager : ScriptableManager
@@ -28,7 +30,7 @@ namespace VitaSoftware
             return currentOrders.Select(x => x.gravestone).Sum(x => x.Price);
         }
 
-        public IEnumerable<GravestoneConfig> ProcessOrders()
+        public List<GravestoneConfig> ProcessOrders()
         {
             var orderedGravestones = currentOrders.Select(x => x.gravestone).ToList();
             currentOrders.Clear();

@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-namespace VitaSoftware
+namespace VitaSoftware.Shop
 {
     public class Queue : MonoBehaviour
     {

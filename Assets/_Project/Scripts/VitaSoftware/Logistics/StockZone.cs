@@ -1,8 +1,8 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
+using VitaSoftware.Shop;
 
-namespace VitaSoftware
+namespace VitaSoftware.Logistics
 {
     public class StockZone : MonoBehaviour
     {

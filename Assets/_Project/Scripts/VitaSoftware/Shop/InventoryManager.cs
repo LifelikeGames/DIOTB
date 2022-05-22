@@ -1,7 +1,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace VitaSoftware
+namespace VitaSoftware.Shop
 {
     [CreateAssetMenu(fileName = "New Inventory Manager", menuName = "VitaSoftware/InventoryManager", order = 0)]
     public class InventoryManager : ScriptableObject

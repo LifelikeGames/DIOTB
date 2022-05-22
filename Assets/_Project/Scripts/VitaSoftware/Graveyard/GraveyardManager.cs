@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace VitaSoftware
+namespace VitaSoftware.Graveyard
 {
     [CreateAssetMenu(fileName = "New Graveyard Manager", menuName = "VitaSoftware/GraveyardManager", order = 0)]
     public class GraveyardManager : ScriptableObject

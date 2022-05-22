@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using VitaSoftware.Shop;
 
-namespace VitaSoftware
+namespace VitaSoftware.Logistics
 {
     [CreateAssetMenu(fileName = "New Delivery Manager", menuName = "VitaSoftware/DeliveryManager", order = 0)]
     public class DeliveryManager : ScriptableObject

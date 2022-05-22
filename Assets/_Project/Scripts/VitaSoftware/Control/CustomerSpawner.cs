@@ -1,9 +1,9 @@
-using System;
 using System.Collections;
 using UnityEngine;
+using VitaSoftware.Shop;
 using Random = UnityEngine.Random;
 
-namespace VitaSoftware
+namespace VitaSoftware.Control
 {
     public class CustomerSpawner : MonoBehaviour
     {

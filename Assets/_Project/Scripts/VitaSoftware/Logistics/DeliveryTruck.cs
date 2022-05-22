@@ -1,8 +1,8 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
+using VitaSoftware.Shop;
 
-namespace VitaSoftware
+namespace VitaSoftware.Logistics
 {
     public class DeliveryTruck : MonoBehaviour
     {
@@ -38,7 +38,7 @@ namespace VitaSoftware
         public void Dispatch(List<GravestoneConfig> pendingOrders)
         {
             Waiting = false;
-            Load = pendingOrders;
+            Load = new(pendingOrders);
         }
     }
 }

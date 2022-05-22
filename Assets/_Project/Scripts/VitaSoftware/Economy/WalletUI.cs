@@ -1,8 +1,7 @@
-using System;
 using TMPro;
 using UnityEngine;
 
-namespace VitaSoftware
+namespace VitaSoftware.Economy
 {
     public class WalletUI : MonoBehaviour
     {

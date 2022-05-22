@@ -1,8 +1,7 @@
-using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace VitaSoftware
+namespace VitaSoftware.Control
 {
     public class Customer : MonoBehaviour
     {

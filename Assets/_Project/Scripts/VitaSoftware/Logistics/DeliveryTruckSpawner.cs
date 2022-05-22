@@ -1,8 +1,8 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
+using VitaSoftware.Shop;
 
-namespace VitaSoftware
+namespace VitaSoftware.Logistics
 {
     public class DeliveryTruckSpawner : MonoBehaviour
     {
@@ -44,6 +44,7 @@ namespace VitaSoftware
             if (lorry.Waiting)
             {
                 lorry.Dispatch(gravestones);
+                pendingOrders.Clear();
             }
             else
             {
@@ -56,7 +57,6 @@ namespace VitaSoftware
         {
             lorry = Instantiate(truckPrefab, transform.position, truckPrefab.transform.rotation);
             lorry.Dispatch(gravestones);
-            
         }
     }
 }

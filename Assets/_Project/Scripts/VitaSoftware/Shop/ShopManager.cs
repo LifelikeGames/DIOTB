@@ -2,11 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.Mathematics;
 using UnityEngine;
+using VitaSoftware.Control;
+using VitaSoftware.Economy;
+using VitaSoftware.Graveyard;
+using VitaSoftware.Logistics;
 using Random = UnityEngine.Random;
 
-namespace VitaSoftware
+namespace VitaSoftware.Shop
 {
     //TODO: Split up into further managers
     public class ShopManager : MonoBehaviour
@@ -26,10 +29,12 @@ namespace VitaSoftware
 
         private List<GravestoneConfig> gravestonesToPlace;
         private List<GravestoneConfig> gravestonesOrdered;
-        public int CurrentStock => gravestonesToPlace.Count + gravestonesOrdered.Count;
+
+        public List<GravestoneConfig> GravestoneWishes { get; private set; }
 
         private void Awake()
         {
+            GravestoneWishes = new();
             gravestonesToPlace = new();
             wallet.Initialise();
             orderManager.Initialise();
@@ -45,6 +50,7 @@ namespace VitaSoftware
         private void OnDisable()
         {
             ShopCounter.CustomerArrived -= OnCustomerArrived;
+            deliveryManager.GravestonesArrived -= OnGravestonesArrived;
         }
 
         private void OnCustomerArrived(Customer customer)
@@ -65,14 +71,21 @@ namespace VitaSoftware
             yield return new WaitForSeconds(Random.Range(0.5f, 1.5f));
             var gravestoneConfig = inventoryManager.GetGravestoneForBudget(customer.Budget);
             //Instantiate(gravestoneConfig.GravestonePrefab, position, Quaternion.identity);
-            orderManager.PlaceOrder(gravestoneConfig, 1);
+            GravestoneWishes.Add(gravestoneConfig);
+            //orderManager.PlaceOrder(gravestoneConfig, 1);
             wallet.EarnMoney(gravestoneConfig.Price);
             HandledCustomer(customer);
             
             OrdersAvailable?.Invoke();//TODO: move to order manager?
         }
 
-        public void ProcessOrders()
+        public void AddOrder(GravestoneConfig config, int quantity)
+        {
+            GravestoneWishes.Remove(GravestoneWishes.LastOrDefault());//TODO: satisfaction
+            orderManager.PlaceOrder(config, quantity);
+        }
+
+        public void PurchaseOrders()
         {
             var price = orderManager.GetPriceOfAllOrders(); 
             if (price > wallet.CurrentMoney)
@@ -88,7 +101,7 @@ namespace VitaSoftware
                 return;
             }
             
-            gravestonesOrdered = orderManager.ProcessOrders().ToList();
+            gravestonesOrdered = orderManager.ProcessOrders();
 
             deliveryManager.DeliverGravestones(gravestonesOrdered);
         }
@@ -96,10 +109,11 @@ namespace VitaSoftware
         private void OnGravestonesArrived(List<GravestoneConfig> gravestones)
         {
             gravestonesToPlace.AddRange(gravestones);
-            foreach (var gravestone in gravestones)
+            for (var index = 0; index < gravestones.Count; index++)
             {
+                var gravestone = gravestones[index];
                 gravestonesOrdered.Remove(gravestone);
-            }   
+            }
         }
 
         public void PlaceGravestones()

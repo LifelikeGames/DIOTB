@@ -1,9 +1,8 @@
-using System;
-using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.AI;
+using VitaSoftware.Shop;
 
-namespace VitaSoftware
+namespace VitaSoftware.Control
 {
     public class AIController : Controller
     {

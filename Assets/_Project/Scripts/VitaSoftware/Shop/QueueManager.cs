@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
+using VitaSoftware.Control;
 
-namespace VitaSoftware
+namespace VitaSoftware.Shop
 {
     [CreateAssetMenu(fileName = "New Queue Manager", menuName = "VitaSoftware/QueueManager", order = 0)]
     public class QueueManager : ScriptableObject

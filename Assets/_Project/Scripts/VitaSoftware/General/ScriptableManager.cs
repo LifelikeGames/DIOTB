@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace VitaSoftware
+namespace VitaSoftware.General
 {
     public abstract class ScriptableManager : ScriptableObject
     {

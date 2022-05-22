@@ -1,12 +1,12 @@
-using System;
 using UnityEngine;
 
-namespace VitaSoftware
+namespace VitaSoftware.Shop
 {
-    public class GravestoneUI : MonoBehaviour
+    public class OrderUI : MonoBehaviour
     {
         [SerializeField] private GameObject graveStoneDisplay;
         [SerializeField] private ShopManager shopManager;
+        [SerializeField] private PurchaseWindowUI purchaseWindowUI;
 
         private void Awake()
         {
@@ -35,7 +35,8 @@ namespace VitaSoftware
 
         public void OrderGraves()
         {
-            shopManager.ProcessOrders();
+            purchaseWindowUI.EnableAndSetOrders();
+            //shopManager.PurchaseOrders();
         }
     }
 }

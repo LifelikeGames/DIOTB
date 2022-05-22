@@ -15,3 +15,4 @@ MonoBehaviour:
   price: 50
   gravestonePrefab: {fileID: 6590280899011829500, guid: 545667b3a288464f9a2c0e4e121d6476,
     type: 3}
+  sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}

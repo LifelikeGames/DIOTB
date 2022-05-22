@@ -766,7 +766,7 @@ PlayerSettings:
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
   scriptingDefineSymbols:
-    Standalone: BUILD_TYPE_GAMEJAM;BUILD_PLATFORM_LINUX;BUILD_ARCH_LINUXX64;STARTER_ASSETS_PACKAGES_CHECKED
+    Standalone: STARTER_ASSETS_PACKAGES_CHECKED
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}

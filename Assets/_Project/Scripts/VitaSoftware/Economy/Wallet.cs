@@ -1,7 +1,8 @@
 using System;
 using UnityEngine;
+using VitaSoftware.General;
 
-namespace VitaSoftware
+namespace VitaSoftware.Economy
 {
     [CreateAssetMenu(fileName = "New Wallet", menuName = "VitaSoftware/Wallet", order = 0)]
     public class Wallet : ScriptableManager
