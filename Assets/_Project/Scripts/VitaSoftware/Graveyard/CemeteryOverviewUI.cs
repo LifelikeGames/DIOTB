@@ -31,9 +31,9 @@ namespace VitaSoftware.Graveyard
             plots = new();
             var combinedIndex = 0;
 
-            for (int y = 0; y < height; y++)
+            for (var y = 0; y < height; y++)
             {
-                for (int x = 0; x < width; x++)
+                for (var x = 0; x < width; x++)
                 {
                     var plot = Instantiate(plotPrefab, plotParent);
                     plots.Add(plot);
