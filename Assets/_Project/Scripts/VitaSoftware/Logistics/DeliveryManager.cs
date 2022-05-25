@@ -8,18 +8,18 @@ namespace VitaSoftware.Logistics
     [CreateAssetMenu(fileName = "New Delivery Manager", menuName = "VitaSoftware/DeliveryManager", order = 0)]
     public class DeliveryManager : ScriptableObject
     {
-        public event Action<List<GravestoneConfig>> GravestonesOrdered;
-        public event Action<List<GravestoneConfig>> GravestonesArrived;
+        public event Action<List<Order>> OrdersOrdered;
+        public event Action<List<Order>> OrdersArrived;
         public event Action TruckReady;
 
-        public void DeliverGravestones(List<GravestoneConfig> gravestones)
+        public void DeliverGravestones(List<Order> orders)
         {
-            GravestonesOrdered?.Invoke(gravestones);
+            OrdersOrdered?.Invoke(orders);
         }
 
-        public void HandleTruckArrived(List<GravestoneConfig> gravestones)
+        public void HandleTruckArrived(List<Order> orders)
         {
-            GravestonesArrived?.Invoke(gravestones);
+            OrdersArrived?.Invoke(orders);
         }
 
         public void StartWaitingForOrder()

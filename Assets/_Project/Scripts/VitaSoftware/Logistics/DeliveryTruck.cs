@@ -13,7 +13,7 @@ namespace VitaSoftware.Logistics
 
         public bool Waiting { get; private set; } = true;
 
-        public List<GravestoneConfig> Load { get; private set; }
+        public List<Order> Load { get; private set; }
 
         private void Update()
         {
@@ -35,7 +35,7 @@ namespace VitaSoftware.Logistics
             }
         }
 
-        public void Dispatch(List<GravestoneConfig> pendingOrders)
+        public void Dispatch(List<Order> pendingOrders)
         {
             Waiting = false;
             Load = new(pendingOrders);

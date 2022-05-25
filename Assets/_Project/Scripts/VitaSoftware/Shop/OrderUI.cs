@@ -1,4 +1,5 @@
 using UnityEngine;
+using VitaSoftware.Graveyard;
 
 namespace VitaSoftware.Shop
 {
@@ -7,6 +8,7 @@ namespace VitaSoftware.Shop
         [SerializeField] private GameObject graveStoneDisplay;
         [SerializeField] private ShopManager shopManager;
         [SerializeField] private PurchaseWindowUI purchaseWindowUI;
+        [SerializeField] private CemeteryOverviewUI cemeteryOverviewUI;
 
         private void Awake()
         {
@@ -28,14 +30,14 @@ namespace VitaSoftware.Shop
             graveStoneDisplay.SetActive(state);
         }
 
-        public void PlaceGraves()
+        public void PlaceOrders()
         {
-            shopManager.PlaceGravestones();
+            cemeteryOverviewUI.PlaceOrders();
         }
 
-        public void OrderGraves()
+        public void OrderGraveObjects()
         {
-            purchaseWindowUI.EnableAndSetOrders();
+            purchaseWindowUI.EnableAndGetOrders();
             //shopManager.PurchaseOrders();
         }
     }

@@ -20,7 +20,7 @@ MonoBehaviour:
   filter:
     condition: 0
     clauses: []
-  pathToButlerExe: /mnt/fourtb/homeextension/slowprograms/Apps/Butler/butler
+  pathToButlerExe: /home/mimsy/Projects/butler-linux-amd64/butler
   nameOfItchUser: vitasoftware
   nameOfItchGame: diotb
   useGeneratedBuildVersion: 1

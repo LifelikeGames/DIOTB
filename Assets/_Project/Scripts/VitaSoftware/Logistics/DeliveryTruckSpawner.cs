@@ -11,16 +11,16 @@ namespace VitaSoftware.Logistics
 
         private DeliveryTruck lorry;
         private bool isOrderWaiting;
-        private List<GravestoneConfig> pendingOrders;
+        private List<Order> pendingOrders;
 
         private void Awake()
         {
-            pendingOrders = new List<GravestoneConfig>();
+            pendingOrders = new();
         }
 
         private void OnEnable()
         {
-            deliveryManager.GravestonesOrdered += OnGravestonesOrdered;
+            deliveryManager.OrdersOrdered += OnOrdersOrdered;
             deliveryManager.TruckReady += OnTruckReady;
         }
 
@@ -33,30 +33,30 @@ namespace VitaSoftware.Logistics
             }
         }
 
-        private void OnGravestonesOrdered(List<GravestoneConfig> gravestones)
+        private void OnOrdersOrdered(List<Order> orders)
         {
             if (lorry == null)
             {
-                SpawnTruck(gravestones);
+                SpawnTruck(orders);
                 return;
             }
 
             if (lorry.Waiting)
             {
-                lorry.Dispatch(gravestones);
+                lorry.Dispatch(orders);
                 pendingOrders.Clear();
             }
             else
             {
                 isOrderWaiting = true;
-                pendingOrders.AddRange(gravestones);
+                pendingOrders.AddRange(orders);
             }
         }
 
-        private void SpawnTruck(List<GravestoneConfig> gravestones)
+        private void SpawnTruck(List<Order> orders)
         {
             lorry = Instantiate(truckPrefab, transform.position, truckPrefab.transform.rotation);
-            lorry.Dispatch(gravestones);
+            lorry.Dispatch(orders);
         }
     }
 }

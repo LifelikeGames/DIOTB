@@ -6,18 +6,18 @@ namespace VitaSoftware.Graveyard
     [CreateAssetMenu(fileName = "New Graveyard Manager", menuName = "VitaSoftware/GraveyardManager", order = 0)]
     public class GraveyardManager : ScriptableObject
     {
-        private Queue<Transform> spotQueue;
+        private List<Transform> spots;
         
-        public void Initialise(IEnumerable<Transform> spots)
+        public void Initialise(IEnumerable<Transform> spotList)
         {
-            spotQueue = new Queue<Transform>(spots);
+            spots = new (spotList);
         }
         
-        public bool TryGetNextSpot(out Vector3 position)
+        public bool TryGetNextSpot(out Vector3 position, int index)
         {
-            if (spotQueue.Count > 0)
+            if (spots.Count > 0)
             {
-                position = spotQueue.Dequeue().position;
+                position = spots[index].position;
                 return true;
             }
 

@@ -12,18 +12,18 @@ namespace VitaSoftware.Logistics
 
         private void OnEnable()
         {
-            deliveryManager.GravestonesArrived += OnGravestonesArrived;
+            deliveryManager.OrdersArrived += OnOrdersArrived;
             shopManager.GravestonesPlaced += OnGravestonesPlaced;
         }
 
-        private void OnGravestonesArrived(List<GravestoneConfig> gravestones)
+        private void OnOrdersArrived(List<Order> orders)
         {
-            UpdateCrates(gravestones);
+            UpdateCrates(orders);
         }
 
-        private void UpdateCrates(List<GravestoneConfig> gravestones)
+        private void UpdateCrates(List<Order> orders)
         {
-            var currentStock = gravestones.Count;
+            var currentStock = orders.Count;
 
             switch (currentStock)
             {

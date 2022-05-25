@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -24,28 +23,25 @@ namespace VitaSoftware.Logistics
                 currentOrders.Add(new Order(config));    
             }
         }
+        
+        public void PlaceOrder(Order order, int quantity)
+        {
+            for (int i = 0; i < quantity; i++)
+            {
+                currentOrders.Add(order);    
+            }
+        }
 
         public float GetPriceOfAllOrders()
         {
             return currentOrders.Select(x => x.gravestone).Sum(x => x.Price);
         }
 
-        public List<GravestoneConfig> ProcessOrders()
+        public List<Order> ProcessOrders()
         {
-            var orderedGravestones = currentOrders.Select(x => x.gravestone).ToList();
+            var orderedGravestones = currentOrders.ToList();
             currentOrders.Clear();
             return orderedGravestones;
-        }
-    }
-    
-    [Serializable]
-    public struct Order
-    {
-        public GravestoneConfig gravestone;
-
-        public Order(GravestoneConfig config)
-        {
-            gravestone = config;
         }
     }
 }
