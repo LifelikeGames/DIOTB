@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using VitaSoftware.Appeal;
 using VitaSoftware.Logistics;
+using VitaSoftware.Notifications;
 
 namespace VitaSoftware.Shop
 {
@@ -21,6 +22,7 @@ namespace VitaSoftware.Shop
         [SerializeField] private GameObject purchaseWindowDisplay;
         [SerializeField] private TextMeshProUGUI placedOrdersListText;
         [SerializeField] private SatisfactionManager satisfactionManager;
+        [SerializeField] private NotificationManager notificationManager;
 
         private bool orderAdded;
 
@@ -100,7 +102,7 @@ namespace VitaSoftware.Shop
         {
             if (GravestoneForCurrentOrder == null || CoffinForCurrentOrder == null)
             {
-                //TODO: show UI and add default coffin/gravestone
+                notificationManager.RequestNotification("A coffin and a gravestone are required");//TODO: add default coffin/gravestone?
                 Debug.LogWarning("Coffin and gravestone are required");
                 return;
             }
@@ -130,7 +132,7 @@ namespace VitaSoftware.Shop
         {
             placedOrdersListText.text = "Current order:\r\n";
             placedOrdersListText.text += "Gravestone: " + (GravestoneForCurrentOrder == null? "None" : GravestoneForCurrentOrder.name) + Environment.NewLine;
-            placedOrdersListText.text += "Coffin: " + (CoffinForCurrentOrder == null? "None" : CoffinForCurrentOrder.name) + Environment.NewLine;
+            placedOrdersListText.text += "Coffin: " + (CoffinForCurrentOrder == null? "None" : CoffinForCurrentOrder.name) + Environment.NewLine+Environment.NewLine;
             placedOrdersListText.text += "Orders added:\r\n\r\n";
 
             foreach (var item in purchasableItems)
@@ -141,7 +143,11 @@ namespace VitaSoftware.Shop
 
         public void PlaceOrder()
         {
-            if (!orderAdded) return;
+            if (!orderAdded)
+            {
+                notificationManager.RequestNotification("At least one order must be finalised");
+                return;
+            }
             
             shopManager.PurchaseOrders();
             purchaseWindowDisplay.SetActive(false);
