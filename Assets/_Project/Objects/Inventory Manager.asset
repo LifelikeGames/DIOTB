@@ -13,5 +13,10 @@ MonoBehaviour:
   m_Name: Inventory Manager
   m_EditorClassIdentifier: 
   gravestoneConfigs:
+  - {fileID: 11400000, guid: ad80a27a7b2f4b18093b20b1251b36d7, type: 2}
   - {fileID: 11400000, guid: 51afa116e7b60f22bbcc0000d592955e, type: 2}
   - {fileID: 11400000, guid: bd44ee97ae2f7b4a6980c1419b216ad1, type: 2}
+  coffinConfigs:
+  - {fileID: 11400000, guid: 871e465891e683b5fb8b694c860e5426, type: 2}
+  - {fileID: 11400000, guid: d15c330e79d9472b69b54020c0e1b42c, type: 2}
+  - {fileID: 11400000, guid: 0d5c1f9b8f966065c9c8e6980348810f, type: 2}

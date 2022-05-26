@@ -7,10 +7,16 @@ namespace VitaSoftware.Shop
     public class InventoryManager : ScriptableObject
     {
         [SerializeField] private GravestoneConfig[] gravestoneConfigs;
+        [SerializeField] private CoffinConfig[] coffinConfigs;
 
         public GravestoneConfig GetGravestoneForBudget(float budget)
         {
             return gravestoneConfigs.Where(x=>x.Price<=budget).OrderByDescending(x=>x.Price).FirstOrDefault();
+        }
+
+        public CoffinConfig GetCoffinForBudget(float budget)
+        {
+            return coffinConfigs.Where(x => x.Price <= budget).OrderByDescending(x => x.Price).FirstOrDefault();
         }
     }
 }

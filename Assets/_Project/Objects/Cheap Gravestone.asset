@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Cheap Gravestone
   m_EditorClassIdentifier: 
   price: 20
+  sprite: {fileID: 21300000, guid: 82a0bbed20d2ca9f2954a153e26f5753, type: 3}
   gravestonePrefab: {fileID: 6570989128633954070, guid: 8609e6ea807754901978c23a55d42737,
     type: 3}
-  sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}

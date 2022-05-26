@@ -8,7 +8,8 @@ namespace VitaSoftware.Graveyard
     {
         [SerializeField] private TextMeshProUGUI coordinateLabel;
         [SerializeField] private Button button;
-        [SerializeField] private Color occupiedColor;
+        [SerializeField] private Color occupiedColor = Color.red;
+        [SerializeField] private Color unoccupiedColor = Color.white;
         [SerializeField] private Image image;
 
         public bool IsOccupied { get; set; }
@@ -22,6 +23,12 @@ namespace VitaSoftware.Graveyard
         {
             IsOccupied = true;
             image.color = occupiedColor;
+        }
+
+        public void CorpseRemoved()
+        {
+            IsOccupied = false;
+            image.color = unoccupiedColor;
         }
     }
 }

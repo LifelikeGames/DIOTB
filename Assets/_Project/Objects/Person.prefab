@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5137658232514507277}
   - component: {fileID: 5137658232514507278}
   - component: {fileID: 5137658232514507276}
-  - component: {fileID: 6154710736387221024}
+  - component: {fileID: 2542789455441295825}
   m_Layer: 0
   m_Name: Person
   m_TagString: Untagged
@@ -72,7 +72,7 @@ MonoBehaviour:
   agent: {fileID: 5137658232514507278}
   queueManager: {fileID: 11400000, guid: 31bc8121ee710cc438910e5bf580d473, type: 2}
   animator: {fileID: 2027774125701687229}
---- !u!114 &6154710736387221024
+--- !u!114 &2542789455441295825
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -84,8 +84,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 970147e827934ed983bd7bda64d1a4c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  budget: 25
   controller: {fileID: 5137658232514507276}
+  budget: 25
+  satisfactionManager: {fileID: 11400000, guid: 999e5015264fd25099c9a5b4d3537bf3,
+    type: 2}
+  inventoryManager: {fileID: 11400000, guid: 9f24739bdcf5dbb34a24d2bfe5eadbb9, type: 2}
+  shopManager: {fileID: 0}
+  wallet: {fileID: 11400000, guid: 45e6f87997a23a9608a336806d074269, type: 2}
 --- !u!1 &5137658232545835326
 GameObject:
   m_ObjectHideFlags: 0

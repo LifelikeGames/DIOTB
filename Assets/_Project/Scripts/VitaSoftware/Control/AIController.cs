@@ -10,7 +10,7 @@ namespace VitaSoftware.Control
         [SerializeField] private QueueManager queueManager;
         [SerializeField] private Animator animator;
 
-        private bool needsGravestone = true;
+        private bool needsAssistance = true;
         private static readonly int Velocity = Animator.StringToHash("Velocity");
 
         private void OnEnable()
@@ -40,14 +40,14 @@ namespace VitaSoftware.Control
 
         private void GetNewTargetPosition()
         {
-            if (!needsGravestone) return;
+            if (!needsAssistance) return;
             if (queueManager.TryGetSpot(out var position, this))
                 agent.SetDestination(position);
         }
 
         public override void SendHome()
         {
-            needsGravestone = false;
+            needsAssistance = false;
             agent.SetDestination(new Vector3(-20, 0, -20));
             Destroy(gameObject, 10);
         }

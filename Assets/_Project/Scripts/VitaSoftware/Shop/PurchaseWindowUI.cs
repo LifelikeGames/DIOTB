@@ -4,6 +4,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using VitaSoftware.Appeal;
 using VitaSoftware.Logistics;
 
 namespace VitaSoftware.Shop
@@ -14,17 +15,18 @@ namespace VitaSoftware.Shop
     {
         [SerializeField] private TextMeshProUGUI ordersListText;
         [SerializeField] private ItemUI itemUIPrefab;
-        [SerializeField] private GravestoneConfig[] purchasableItems;
+        [SerializeField] private PurchasableItem[] purchasableItems;
         [SerializeField] private Transform purchaseGridParent;
         [SerializeField] private ShopManager shopManager;
         [SerializeField] private GameObject purchaseWindowDisplay;
         [SerializeField] private TextMeshProUGUI placedOrdersListText;
+        [SerializeField] private SatisfactionManager satisfactionManager;
 
         private bool orderAdded;
 
         private int currentOrderId = -1;
         private Order currentRequestedOrder;
-        private List<GravestoneConfig> addedConfigs;
+        private List<PurchasableItem> addedConfigs;
 
         private void Awake()
         {
@@ -36,7 +38,7 @@ namespace VitaSoftware.Shop
                 var button = itemUI.GetComponent<Button>();
                 button.onClick.AddListener(()=>AddToOrder(purchasableItem));
             }
-            addedConfigs = new List<GravestoneConfig>();
+            addedConfigs = new ();
         }
 
         public void EnableAndGetOrders()
@@ -59,10 +61,12 @@ namespace VitaSoftware.Shop
 
             currentOrderId = shopManager.OrderWishes.IndexOf(currentRequestedOrder);
 
-            ordersListText.text += $"Order {currentRequestedOrder.id}\r\n\r\nRequested gravestone: {currentRequestedOrder.gravestone.name}."; //TODO: add formatting to SO
+            ordersListText.text += $"Order {currentRequestedOrder.id}\r\n\r\nRequested gravestone: {currentRequestedOrder.gravestone.name}\r\nRequestedCoffing: {currentRequestedOrder.coffin.name}"; //TODO: add formatting to SO
         }
 
-        public void AddToOrder(GravestoneConfig config)
+        public GravestoneConfig GravestoneForCurrentOrder { get; private set; }
+        public CoffinConfig CoffinForCurrentOrder { get; private set; }
+        public void AddToOrder(PurchasableItem config)
         {
             if (currentOrderId < 0)
             {
@@ -70,11 +74,44 @@ namespace VitaSoftware.Shop
                 return;
             }
 
-            var actualOrder = new Order(config, currentRequestedOrder.id);
+            if (config is GravestoneConfig gravestoneConfig)
+            {
+                if (GravestoneForCurrentOrder != null)//TODO: allow replacing for current order
+                {
+                    Debug.LogWarning("Gravestone already added to order");
+                    return;
+                }
+                GravestoneForCurrentOrder = gravestoneConfig;
+            }
+            else
+            {
+                if (CoffinForCurrentOrder != null)
+                {
+                    Debug.LogWarning("Coffin already added to order");
+                    return;
+                }
+                CoffinForCurrentOrder = (CoffinConfig) config;
+            }
+            UpdateAddedOrders(); 
+            
+        }
+
+        public void FinaliseOrder()
+        {
+            if (GravestoneForCurrentOrder == null || CoffinForCurrentOrder == null)
+            {
+                //TODO: show UI and add default coffin/gravestone
+                Debug.LogWarning("Coffin and gravestone are required");
+                return;
+            }
+            var actualOrder = new Order(GravestoneForCurrentOrder, CoffinForCurrentOrder, currentRequestedOrder.id);
+
+            satisfactionManager.CalculateSatisfaction(actualOrder, currentRequestedOrder);
             shopManager.AddOrder(actualOrder, 1, currentOrderId);
             orderAdded = true;
             
-            addedConfigs.Add(config);
+            addedConfigs.Add(GravestoneForCurrentOrder);
+            addedConfigs.Add(CoffinForCurrentOrder);
             UpdateAddedOrders();
 
             if (shopManager.OrderWishes.Count > 0)
@@ -84,11 +121,17 @@ namespace VitaSoftware.Shop
                 ordersListText.text = "All orders handled!";
                 currentOrderId = -1;
             }
+
+            CoffinForCurrentOrder = null;
+            GravestoneForCurrentOrder = null;
         }
 
         private void UpdateAddedOrders()
         {
-            placedOrdersListText.text = "Orders added:\r\n\r\n";
+            placedOrdersListText.text = "Current order:\r\n";
+            placedOrdersListText.text += "Gravestone: " + (GravestoneForCurrentOrder == null? "None" : GravestoneForCurrentOrder.name) + Environment.NewLine;
+            placedOrdersListText.text += "Coffin: " + (CoffinForCurrentOrder == null? "None" : CoffinForCurrentOrder.name) + Environment.NewLine;
+            placedOrdersListText.text += "Orders added:\r\n\r\n";
 
             foreach (var item in purchasableItems)
             {

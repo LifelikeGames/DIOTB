@@ -6,12 +6,12 @@ namespace VitaSoftware.Shop
 {
     public class ShopCounter : MonoBehaviour
     {
-        public static event Action<Customer> CustomerArrived;
-        public static event Action<Customer> CustomerLeft;
+        public static event Action<BaseCustomer> CustomerArrived;
+        public static event Action<BaseCustomer> CustomerLeft;
         
         private void OnTriggerEnter(Collider other)
         {
-            if (other.transform.parent.TryGetComponent<Customer>(out var customer))
+            if (other.transform.parent.TryGetComponent<BaseCustomer>(out var customer))
             {
                 CustomerArrived?.Invoke(customer);
             }
@@ -19,7 +19,7 @@ namespace VitaSoftware.Shop
         
         private void OnTriggerExit(Collider other)
         {
-            if (other.transform.parent.TryGetComponent<Customer>(out var customer))
+            if (other.transform.parent.TryGetComponent<BaseCustomer>(out var customer))
             {
                 CustomerLeft?.Invoke(customer);
             }

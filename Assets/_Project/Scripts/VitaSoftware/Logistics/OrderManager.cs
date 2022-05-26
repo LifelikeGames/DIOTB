@@ -34,7 +34,7 @@ namespace VitaSoftware.Logistics
 
         public float GetPriceOfAllOrders()
         {
-            return currentOrders.Select(x => x.gravestone).Sum(x => x.Price);
+            return currentOrders.Select(x => x.gravestone).Sum(x => x.Price) + currentOrders.Select(x=>x.coffin).Sum(x=>x.Price);
         }
 
         public List<Order> ProcessOrders()

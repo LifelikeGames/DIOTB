@@ -7,6 +7,7 @@ using UnityEngine.Timeline;
 using UnityEngine.UI;
 using VitaSoftware.Logistics;
 using VitaSoftware.Shop;
+using VitaSoftware.Underworld;
 
 namespace VitaSoftware.Graveyard
 {
@@ -20,6 +21,9 @@ namespace VitaSoftware.Graveyard
         [SerializeField] private int width =7, height = 2;
         [SerializeField] private TextMeshProUGUI currentOrderText;
         [SerializeField] private GridLayoutGroup grid;
+        [SerializeField] private GameObject sellCorpseWindow;
+        [SerializeField] private UnderworldManager underworldManager;
+        [SerializeField] private GraveyardManager graveyardManager;
 
         private Order currentOrder;
         private List<PlotUI> plots;
@@ -29,7 +33,6 @@ namespace VitaSoftware.Graveyard
             grid.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
             grid.constraintCount = width;
             plots = new();
-            var combinedIndex = 0;
 
             for (var y = 0; y < height; y++)
             {
@@ -38,13 +41,13 @@ namespace VitaSoftware.Graveyard
                     var plot = Instantiate(plotPrefab, plotParent);
                     plots.Add(plot);
                     var button = plot.GetComponent<Button>();
-                    var index = combinedIndex++;
-                    button.onClick.AddListener(()=>SelectPlot(plots.IndexOf(plot)));
+                    button.onClick.AddListener(()=>ClickOnPlot(plots.IndexOf(plot)));
                     plot.SetLabel(GetCoordinateString(y,x));
                     
                 }
             }
             
+            sellCorpseWindow.SetActive(false);
             cemeteryOverviewDisplay.SetActive(false);
         }
 
@@ -76,9 +79,19 @@ namespace VitaSoftware.Graveyard
             currentOrderText.text = "Next order: Order " + currentOrder.id + " with " + currentOrder.gravestone.name;
         }
 
-        public void SelectPlot(int index)
+        private int currentCorpseIndex;
+        public void ClickOnPlot(int index)
         {
-            if (plots[index].IsOccupied || shopManager.OrdersToPlace.Count < 1) return;
+            if (plots[index].IsOccupied)
+            {
+                if (!underworldManager.IsActive) return;
+                
+                currentCorpseIndex = index;
+                OpenSellCorpseWindow();
+
+                return;
+            } 
+            if(shopManager.OrdersToPlace.Count < 1 || currentOrder == null) return;
             plots[index].ItemsPlaced();
             shopManager.OrdersToPlace.Remove(currentOrder);
             shopManager.PlaceGravestone(currentOrder.gravestone, index);
@@ -88,6 +101,25 @@ namespace VitaSoftware.Graveyard
                 DisplayNextOrder();
             else
                 currentOrderText.text = "No orders left to place";
+        }
+
+        private void OpenSellCorpseWindow()
+        {
+            sellCorpseWindow.SetActive(true);
+        }
+
+        public void SellCorpse()
+        {
+            underworldManager.SellCorpse();
+            plots[currentCorpseIndex].CorpseRemoved();
+            graveyardManager.EmptySpot(currentCorpseIndex);
+            
+            sellCorpseWindow.SetActive(false);
+        }
+
+        public void CancelSellCorpse()
+        {
+            sellCorpseWindow.SetActive(false);
         }
     }
 }

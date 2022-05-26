@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a583467343b94072a6d1094e76d3fdab, type: 3}
   m_Name: Wallet
   m_EditorClassIdentifier: 
-  startingMoney: 20
+  startingMoney: 100

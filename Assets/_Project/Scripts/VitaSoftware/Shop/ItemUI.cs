@@ -9,9 +9,9 @@ namespace VitaSoftware.Shop
         [SerializeField] private TextMeshProUGUI label;
         [SerializeField] private Image image;
 
-        private GravestoneConfig config;
+        private PurchasableItem config;
 
-        public void SetFields(GravestoneConfig purchasableItem)
+        public void SetFields(PurchasableItem purchasableItem)
         {
             label.text = purchasableItem.name + " - $" + purchasableItem.Price;
             image.sprite = purchasableItem.Sprite;

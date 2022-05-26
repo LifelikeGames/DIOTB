@@ -8,7 +8,7 @@ namespace VitaSoftware.Shop
         [SerializeField] private ShopManager shopManager;
         [SerializeField] private GameObject waitingCustomerDisplay;
 
-        private Customer nextCustomer;
+        private BaseCustomer nextCustomer;
         
         private void OnEnable()
         {
@@ -20,7 +20,7 @@ namespace VitaSoftware.Shop
             ToggleCustomerDisplay(false);
         }
 
-        private void OnCustomerWaiting(Customer customer)
+        private void OnCustomerWaiting(BaseCustomer customer)
         {
             ToggleCustomerDisplay(true);
             nextCustomer = customer;

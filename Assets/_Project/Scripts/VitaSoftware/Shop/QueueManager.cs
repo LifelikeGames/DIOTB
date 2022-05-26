@@ -50,7 +50,7 @@ namespace VitaSoftware.Shop
             return customerQueue.Count < 5;
         }
 
-        public void CustomerHandled(Controller customer)
+        public void CustomerHandled()
         {
             customerQueue.Dequeue();
             customerQueue.Clear();

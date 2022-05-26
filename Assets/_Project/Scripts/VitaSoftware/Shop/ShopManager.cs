@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using VitaSoftware.Control;
 using VitaSoftware.Economy;
@@ -22,7 +23,7 @@ namespace VitaSoftware.Shop
         [SerializeField] private OrderManager orderManager;
         [SerializeField] private DeliveryManager deliveryManager;
         
-        public event Action<Customer> CustomerWaiting;
+        public event Action<BaseCustomer> CustomerWaiting;
         public event Action OrdersAvailable;
         public event Action GravestonesPlaced;
 
@@ -52,30 +53,24 @@ namespace VitaSoftware.Shop
             deliveryManager.OrdersArrived -= OnOrdersArrived;
         }
 
-        private void OnCustomerArrived(Customer customer)
+        private void OnCustomerArrived(BaseCustomer customer)
         {
             Debug.Log("Customer arrived");
             CustomerWaiting?.Invoke(customer);
             //HandleCustomer(customer);//TODO: make interactable
         }
 
-        public void HandleCustomer(Customer customer)
+        public void HandleCustomer(BaseCustomer customer)
         {
             Debug.Log("Handling customer");
             StartCoroutine(ProcessCustomer(customer));
         }
 
-        private IEnumerator ProcessCustomer(Customer customer)
+        private IEnumerator ProcessCustomer(BaseCustomer customer)
         {
             yield return new WaitForSeconds(Random.Range(0.5f, 1.5f));
-            var gravestoneConfig = inventoryManager.GetGravestoneForBudget(customer.Budget);
-            //TODO: get random flower and other decoration wishes 
-
-            var order = new Order(gravestoneConfig);
-            OrderWishes.Add(order);
-            
-            wallet.EarnMoney(gravestoneConfig.Price);
-            HandledCustomer(customer);
+            customer.Handle();
+            HandledCustomer();
             
             OrdersAvailable?.Invoke();//TODO: move to order manager?
         }
@@ -145,9 +140,9 @@ namespace VitaSoftware.Shop
 
         public void PlaceGravestone(GravestoneConfig config, int index)
         {
-            if (graveyardManager.TryGetNextSpot(out var position, index))
+            if (graveyardManager.TryPlaceGravestone(config.GravestonePrefab, index))
             {
-                Instantiate(config.GravestonePrefab, position, Quaternion.identity);
+                
             }
             else
             {
@@ -161,10 +156,9 @@ namespace VitaSoftware.Shop
             
         }
 
-        private void HandledCustomer(Customer customer)
+        private void HandledCustomer()
         {
-            customer.SendHome();
-            queueManager.CustomerHandled(null); //TODO: Improve
+            queueManager.CustomerHandled(); //TODO: Improve
         }
     }
 }

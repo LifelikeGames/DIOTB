@@ -7,6 +7,7 @@ namespace VitaSoftware.Logistics
     public class Order
     {
         public GravestoneConfig gravestone;
+        public CoffinConfig coffin;
         public int id;
         private static int nextId = 1;
 
@@ -18,9 +19,16 @@ namespace VitaSoftware.Logistics
             id = nextId++;
         }
 
-        public Order(GravestoneConfig config, int id)
+        public Order(GravestoneConfig stone, CoffinConfig box)
+        {
+            gravestone = stone;
+            coffin = box;
+        }
+
+        public Order(GravestoneConfig config, CoffinConfig box, int id)
         {
             gravestone = config;
+            coffin = box;
             this.id = id;
         }
     }
