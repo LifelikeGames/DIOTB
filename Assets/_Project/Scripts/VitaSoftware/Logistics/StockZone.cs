@@ -21,10 +21,10 @@ namespace VitaSoftware.Logistics
             UpdateCrates(orders);
         }
 
-        //TODO: crates not being removed?
-        private void UpdateCrates(List<Order> orders)
+        public void UpdateCrates(List<Order> orders)
         {
             var currentStock = orders.Count;
+            ClearStock();
 
             switch (currentStock)
             {

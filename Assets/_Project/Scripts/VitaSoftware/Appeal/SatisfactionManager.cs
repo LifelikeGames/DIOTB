@@ -49,7 +49,7 @@ namespace VitaSoftware.Appeal
                     LowerSatisfaction(tooCheapPenalty);
                 else if (actualItem.Price > requestedItem.Price)
                     LowerSatisfaction(tooExpensivePenalty);
-                else if (actualItem.name != requestedItem.name)
+                else if (actualItem.Label != requestedItem.Label)
                     LowerSatisfaction(differentItemPenalty);
                 else
                     RaiseSatisfaction(goodChoiceBonus);

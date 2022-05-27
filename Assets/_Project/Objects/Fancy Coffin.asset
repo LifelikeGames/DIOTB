@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   price: 50
   sprite: {fileID: 21300000, guid: 179d903d691fc1293bfd09119a7d6f14, type: 3}
+  label: C1500
   prefab: {fileID: 5465111227585666746, guid: 41f75ea8b4f6f838691f9c3928085b06, type: 3}

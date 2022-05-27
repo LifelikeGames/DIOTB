@@ -63,7 +63,7 @@ namespace VitaSoftware.Shop
 
             currentOrderId = shopManager.OrderWishes.IndexOf(currentRequestedOrder);
 
-            ordersListText.text += $"Order {currentRequestedOrder.id}\r\n\r\nRequested gravestone: {currentRequestedOrder.gravestone.name}\r\nRequestedCoffing: {currentRequestedOrder.coffin.name}"; //TODO: add formatting to SO
+            ordersListText.text += $"Requested items, Order {currentRequestedOrder.id}\r\n\r\nGravestone: {currentRequestedOrder.gravestone.Label}\r\nCoffin: {currentRequestedOrder.coffin.Label}"; //TODO: add formatting to SO
         }
 
         public GravestoneConfig GravestoneForCurrentOrder { get; private set; }
@@ -131,13 +131,13 @@ namespace VitaSoftware.Shop
         private void UpdateAddedOrders()
         {
             placedOrdersListText.text = "Current order:\r\n";
-            placedOrdersListText.text += "Gravestone: " + (GravestoneForCurrentOrder == null? "None" : GravestoneForCurrentOrder.name) + Environment.NewLine;
-            placedOrdersListText.text += "Coffin: " + (CoffinForCurrentOrder == null? "None" : CoffinForCurrentOrder.name) + Environment.NewLine+Environment.NewLine;
+            placedOrdersListText.text += "Gravestone: " + (GravestoneForCurrentOrder == null? "None" : GravestoneForCurrentOrder.Label) + Environment.NewLine;
+            placedOrdersListText.text += "Coffin: " + (CoffinForCurrentOrder == null? "None" : CoffinForCurrentOrder.Label) + Environment.NewLine+Environment.NewLine;
             placedOrdersListText.text += "Orders added:\r\n\r\n";
 
             foreach (var item in purchasableItems)
             {
-                placedOrdersListText.text += item.name + " - " + addedConfigs.Count(x => x == item) + Environment.NewLine;
+                placedOrdersListText.text += item.Label + " - " + addedConfigs.Count(x => x == item) + Environment.NewLine;
             }
         }
 
@@ -150,6 +150,7 @@ namespace VitaSoftware.Shop
             }
             
             shopManager.PurchaseOrders();
+            addedConfigs.Clear();
             purchaseWindowDisplay.SetActive(false);
         }
         

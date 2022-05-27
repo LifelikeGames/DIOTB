@@ -6,8 +6,10 @@ namespace VitaSoftware.Shop
     {
         [SerializeField] protected float price;
         [SerializeField] private Sprite sprite;
+        [SerializeField] private string label;
         
         public float Price => price;
         public Sprite Sprite => sprite;
+        public string Label => label;
     }
 }

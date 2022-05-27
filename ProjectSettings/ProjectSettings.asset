@@ -140,6 +140,8 @@ PlayerSettings:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -159,11 +161,11 @@ PlayerSettings:
   applicationIdentifier:
     Standalone: eu.vitasoftware.deathbegins
   buildNumber:
-    Standalone: 5
-    iPhone: 5
+    Standalone: 7
+    iPhone: 7
     tvOS: 0
   overrideDefaultApplicationIdentifier: 1
-  AndroidBundleVersionCode: 6
+  AndroidBundleVersionCode: 8
   AndroidMinSdkVersion: 22
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1

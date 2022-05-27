@@ -24,6 +24,7 @@ namespace VitaSoftware.Graveyard
         [SerializeField] private GameObject sellCorpseWindow;
         [SerializeField] private UnderworldManager underworldManager;
         [SerializeField] private GraveyardManager graveyardManager;
+        [SerializeField] private StockZone stockZone;
 
         private Order currentOrder;
         private List<PlotUI> plots;
@@ -76,7 +77,7 @@ namespace VitaSoftware.Graveyard
                 return;
             }
 
-            currentOrderText.text = "Next order: Order " + currentOrder.id + " with " + currentOrder.gravestone.name;
+            currentOrderText.text = "Next order: Order " + currentOrder.id + " with " + currentOrder.gravestone.Label;
         }
 
         private int currentCorpseIndex;
@@ -96,6 +97,7 @@ namespace VitaSoftware.Graveyard
             shopManager.OrdersToPlace.Remove(currentOrder);
             shopManager.PlaceGravestone(currentOrder.gravestone, index);
             shopManager.PlaceGraveDecorations();
+            stockZone.UpdateCrates(shopManager.OrdersToPlace);
 
             if (shopManager.OrdersToPlace.Count > 0)
                 DisplayNextOrder();

@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   price: 50
   sprite: {fileID: 21300000, guid: 2e059933eafa5cba19d501c4b361e46d, type: 3}
+  label: GE43
   gravestonePrefab: {fileID: 6590280899011829500, guid: 545667b3a288464f9a2c0e4e121d6476,
     type: 3}

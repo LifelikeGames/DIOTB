@@ -7,6 +7,7 @@ using VitaSoftware.Control;
 using VitaSoftware.Economy;
 using VitaSoftware.Graveyard;
 using VitaSoftware.Logistics;
+using VitaSoftware.Notifications;
 using Random = UnityEngine.Random;
 
 namespace VitaSoftware.Shop
@@ -22,12 +23,14 @@ namespace VitaSoftware.Shop
         [SerializeField] private InventoryManager inventoryManager;
         [SerializeField] private OrderManager orderManager;
         [SerializeField] private DeliveryManager deliveryManager;
+        [SerializeField] private NotificationManager notificationManager;
         
         public event Action<BaseCustomer> CustomerWaiting;
         public event Action OrdersAvailable;
         public event Action GravestonesPlaced;
 
         private List<Order> itemsOrdered;
+        private bool isFirstCustomer = true;
 
         public List<Order> OrderWishes { get; private set; }
         public List<Order> OrdersToPlace { get; set; }
@@ -71,7 +74,13 @@ namespace VitaSoftware.Shop
             yield return new WaitForSeconds(Random.Range(0.5f, 1.5f));
             customer.Handle();
             HandledCustomer();
+
             
+            if (isFirstCustomer)
+            {
+                notificationManager.RequestNotification("Congratulations, you have received your first order!");
+                isFirstCustomer = false;
+            }
             OrdersAvailable?.Invoke();//TODO: move to order manager?
         }
 
@@ -147,7 +156,6 @@ namespace VitaSoftware.Shop
             else
             {
                 Debug.Log("No more room");
-                return;
             }
         }
 

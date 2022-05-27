@@ -13,7 +13,7 @@ namespace VitaSoftware.Shop
 
         public void SetFields(PurchasableItem purchasableItem)
         {
-            label.text = purchasableItem.name + " - $" + purchasableItem.Price;
+            label.text = purchasableItem.Label + " - $" + purchasableItem.Price;
             image.sprite = purchasableItem.Sprite;
             config = purchasableItem;
         }

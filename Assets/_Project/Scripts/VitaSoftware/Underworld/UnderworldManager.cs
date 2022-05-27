@@ -15,7 +15,7 @@ namespace VitaSoftware.Underworld
         {
             IsActive = false;
         }
-
+        
         public void SellCorpse()
         {
             wallet.EarnMoney(corpsePrice);
