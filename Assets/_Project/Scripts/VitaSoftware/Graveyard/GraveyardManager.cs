@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace VitaSoftware.Graveyard
@@ -21,7 +23,7 @@ namespace VitaSoftware.Graveyard
         {
             if (spots.Count > 0)
             {
-                position = spots[index].position;
+                position = spots[index].transform.position;
                 return true;
             }
 

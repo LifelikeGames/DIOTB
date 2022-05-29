@@ -97,7 +97,7 @@ namespace VitaSoftware.Graveyard
             shopManager.OrdersToPlace.Remove(currentOrder);
             shopManager.PlaceGravestone(currentOrder.gravestone, index);
             shopManager.PlaceGraveDecorations();
-            stockZone.UpdateCrates(shopManager.OrdersToPlace);
+            //stockZone.UpdateCrates(shopManager.OrdersToPlace);
 
             if (shopManager.OrdersToPlace.Count > 0)
                 DisplayNextOrder();

@@ -10,6 +10,8 @@ namespace VitaSoftware.Logistics
         [SerializeField] private ShopManager shopManager;
         [SerializeField] private GameObject[] deliveries;
 
+        private int currentStock;
+
         private void OnEnable()
         {
             deliveryManager.OrdersArrived += OnOrdersArrived;
@@ -18,12 +20,12 @@ namespace VitaSoftware.Logistics
 
         private void OnOrdersArrived(List<Order> orders)
         {
-            UpdateCrates(orders);
+            currentStock += orders.Count;
+            UpdateCrates();
         }
 
-        public void UpdateCrates(List<Order> orders)
+        public void UpdateCrates()
         {
-            var currentStock = orders.Count;
             ClearStock();
 
             switch (currentStock)
@@ -45,7 +47,8 @@ namespace VitaSoftware.Logistics
 
         private void OnGravestonesPlaced()
         {
-            ClearStock();//TODO: handle leftovers
+            currentStock--;
+            UpdateCrates();
         }
 
         private void Awake()

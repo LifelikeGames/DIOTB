@@ -9,6 +9,7 @@ namespace VitaSoftware.Control
         [SerializeField] private NavMeshAgent agent;
         [SerializeField] private QueueManager queueManager;
         [SerializeField] private Animator animator;
+        [SerializeField] private Vector3 target;
 
         private bool needsAssistance = true;
         private static readonly int Velocity = Animator.StringToHash("Velocity");
@@ -26,6 +27,8 @@ namespace VitaSoftware.Control
         private void FixedUpdate()
         {
             animator.SetFloat(Velocity, agent.velocity.magnitude);
+            if(needsAssistance)
+                transform.LookAt(target);
         }
 
         private void OnNewSpotAvailable()

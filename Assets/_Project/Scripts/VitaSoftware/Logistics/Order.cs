@@ -23,6 +23,7 @@ namespace VitaSoftware.Logistics
         {
             gravestone = stone;
             coffin = box;
+            id = nextId++;
         }
 
         public Order(GravestoneConfig config, CoffinConfig box, int id)

@@ -151,7 +151,7 @@ namespace VitaSoftware.Shop
         {
             if (graveyardManager.TryPlaceGravestone(config.GravestonePrefab, index))
             {
-                
+                GravestonesPlaced?.Invoke();
             }
             else
             {

@@ -63,7 +63,7 @@ namespace VitaSoftware.Shop
 
             currentOrderId = shopManager.OrderWishes.IndexOf(currentRequestedOrder);
 
-            ordersListText.text += $"Requested items, Order {currentRequestedOrder.id}\r\n\r\nGravestone: {currentRequestedOrder.gravestone.Label}\r\nCoffin: {currentRequestedOrder.coffin.Label}"; //TODO: add formatting to SO
+            ordersListText.text += $"Requested items for Customer {currentRequestedOrder.id}\r\n\r\nGravestone: {currentRequestedOrder.gravestone.Label}\r\nCoffin: {currentRequestedOrder.coffin.Label}"; //TODO: add formatting to SO
         }
 
         public GravestoneConfig GravestoneForCurrentOrder { get; private set; }
@@ -100,6 +100,12 @@ namespace VitaSoftware.Shop
 
         public void FinaliseOrder()
         {
+            if (currentOrderId < 0)
+            {
+                Debug.Log("No order selected");
+                notificationManager.RequestNotification("No more orders to handle");
+                return;
+            }
             if (GravestoneForCurrentOrder == null || CoffinForCurrentOrder == null)
             {
                 notificationManager.RequestNotification("A coffin and a gravestone are required");//TODO: add default coffin/gravestone?
@@ -114,7 +120,6 @@ namespace VitaSoftware.Shop
             
             addedConfigs.Add(GravestoneForCurrentOrder);
             addedConfigs.Add(CoffinForCurrentOrder);
-            UpdateAddedOrders();
 
             if (shopManager.OrderWishes.Count > 0)
                 GetNextOrder();
@@ -126,6 +131,7 @@ namespace VitaSoftware.Shop
 
             CoffinForCurrentOrder = null;
             GravestoneForCurrentOrder = null;
+            UpdateAddedOrders();
         }
 
         private void UpdateAddedOrders()
@@ -152,6 +158,7 @@ namespace VitaSoftware.Shop
             shopManager.PurchaseOrders();
             addedConfigs.Clear();
             purchaseWindowDisplay.SetActive(false);
+            orderAdded = false;
         }
         
         public void Cancel()

@@ -30,6 +30,7 @@ namespace VitaSoftware.Logistics
             {
                 lorry.Dispatch(pendingOrders);
                 pendingOrders.Clear();
+                isOrderWaiting = false;
             }
         }
 
