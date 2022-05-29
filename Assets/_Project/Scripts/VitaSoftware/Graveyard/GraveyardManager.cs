@@ -43,6 +43,7 @@ namespace VitaSoftware.Graveyard
             {
                 var gravestone = Instantiate(gravestonePrefab, position, Quaternion.identity);
                 gravestone.transform.SetParent(gravestoneParent);
+                gravestone.transform.position += Vector3.up*0.5f;
                 gravestones.Add(index, gravestone);
                 return true;
             }

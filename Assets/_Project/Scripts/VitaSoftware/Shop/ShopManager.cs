@@ -60,7 +60,6 @@ namespace VitaSoftware.Shop
         {
             Debug.Log("Customer arrived");
             CustomerWaiting?.Invoke(customer);
-            //HandleCustomer(customer);//TODO: make interactable
         }
 
         public void HandleCustomer(BaseCustomer customer)
@@ -86,7 +85,7 @@ namespace VitaSoftware.Shop
 
         public void AddOrder(Order order, int quantity, int index)
         {
-            OrderWishes.Remove(OrderWishes[index]);//TODO: satisfaction
+            OrderWishes.Remove(OrderWishes[index]);
             orderManager.PlaceOrder(order, quantity);
         }
 

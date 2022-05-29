@@ -41,10 +41,12 @@ namespace VitaSoftware.Audio
 
         public override float PlayNextClip()
         {
-            if (!isSoundEnabled || nextRequestedSFX == null) return float.MaxValue;
+            if (!isSoundEnabled || nextRequestedSFX == null) return 0.1f;
             audioSource.clip = nextRequestedSFX;
             audioSource.Play();
-            return nextRequestedSFX.length;
+            var length = nextRequestedSFX.length;
+            nextRequestedSFX = null;
+            return length;
         }
 
         public void ToggleSounds(bool value)

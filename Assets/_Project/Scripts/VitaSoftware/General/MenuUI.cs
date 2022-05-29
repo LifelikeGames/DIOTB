@@ -17,6 +17,9 @@ namespace VitaSoftware.General
         private void Awake()
         {
             ToggleMenu();
+        }
+        private void Start()
+        {
             soundToggle.isOn = soundPlayer.IsSoundEnabled;
             musicToggle.isOn = musicPlayer.IsMusicActive;
         }

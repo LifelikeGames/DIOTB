@@ -17,7 +17,8 @@ namespace VitaSoftware.Audio
 
         private IEnumerator PlayClips()
         {
-            yield return new WaitForSeconds(audioManager.PlayNextClip());
+            while(true)
+                yield return new WaitForSeconds(audioManager.PlayNextClip());
         }
     }
 }

@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e830d8dd92443c8b817b3d8d61c8d55, type: 3}
+  m_Name: ElaborateCoffin
+  m_EditorClassIdentifier: 
+  price: 75
+  sprite: {fileID: 21300000, guid: 3a865e81dd56b7dcf9fde5ba1fbc34c7, type: 3}
+  label: C3000
+  prefab: {fileID: 7722899428868986481, guid: 63bcb1dcb2dbb24578685a56da0a53f0, type: 3}

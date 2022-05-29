@@ -10,8 +10,6 @@ using VitaSoftware.Notifications;
 
 namespace VitaSoftware.Shop
 {
-    //TODO: require gravestone purchase for each order??
-    //TODO: clear order list on the left after orders are delivered
     public class PurchaseWindowUI : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI ordersListText;

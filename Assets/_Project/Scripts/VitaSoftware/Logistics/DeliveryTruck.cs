@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using VitaSoftware.Audio;
 using VitaSoftware.Shop;
 
 namespace VitaSoftware.Logistics
@@ -12,6 +13,7 @@ namespace VitaSoftware.Logistics
         [SerializeField] private AudioSource engine;
         [SerializeField] private AudioSource beep;
         [SerializeField] private float unloadTime =3;
+        [SerializeField] private SoundManager soundManager;
 
         private int sign = -1;
         private bool unloading;
@@ -34,7 +36,7 @@ namespace VitaSoftware.Logistics
             }
             else if (other.TryGetComponent<DeliveryTruckSpawner>(out var spawner))
             {
-                engine.Stop();
+                SetEngineState(false);
                 Waiting = true;
                 deliveryManager.StartWaitingForOrder();
                 sign = -1;
@@ -48,21 +50,41 @@ namespace VitaSoftware.Logistics
             IEnumerator UnloadItems()
             {
                 unloading = true;
-                beep.Stop();
+                SetReverseState(false);
                 yield return new WaitForSeconds(unloadTime);
                 unloading = false;
                 sign = 1;
-                engine.Stop();
-                engine.Play();
+                SetEngineState(false);
+                SetEngineState(true);
             }
         }
 
         public void Dispatch(List<Order> pendingOrders)
         {
-            engine.Play();
-            beep.Play();
+            SetEngineState(true);
+            SetReverseState(true);
             Waiting = false;
             Load = new(pendingOrders);
+        }
+
+        private void SetEngineState(bool value)
+        {
+            if(!soundManager.IsSoundEnabled) return;
+                
+            if(value)
+                engine.Play();
+            else 
+                engine.Stop();
+        }
+
+        private void SetReverseState(bool value)
+        {
+            if (!soundManager.IsSoundEnabled) return;
+            
+            if(value)
+                beep.Play();
+            else
+                beep.Stop();
         }
     }
 }
