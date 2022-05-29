@@ -1,0 +1,21 @@
+The Beginning of an Undertaking
+
+- VitaSoftware and Mimsybean
+
+Code & Game design
+
+- VitaSoftware
+
+3D Models
+
+- Mimsybean (gravestones, icon, coffins, graveyard)
+- Quaternius (lorry, lamps)
+
+UI elements and SFX
+
+- Kenney
+
+Other sounds and music
+
+- Freesound.org (vehicle SFX)
+- HoliznaCC0 (background music)
